@@ -1,7 +1,13 @@
 package com.mbr.hourcounter;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
 import android.widget.Button;
 
 /**
@@ -9,11 +15,17 @@ import android.widget.Button;
  */
 public class MainPage extends Activity {
 
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.xml.main_layout);
+        WebView wv = (WebView)findViewById(R.id.webview);
+        wv.loadUrl("file:///android_asset/html/index.html");
+        WebSettings webSettings = wv.getSettings();
+        webSettings.setJavaScriptEnabled(true);
+        final JsWrapper jsWrapper = new JsWrapper(this,wv);
+        wv.addJavascriptInterface(jsWrapper,"JsWrapper");
+
     }
-    public void onStart(){
-        Button trackHour;
-    }
+
 }
